@@ -1,0 +1,31 @@
+{% extends "master.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h1>Buscar Solicitud de Inscripción</h1>
+    <p>Los vendedores de gas licuado podrán buscar si un usuario cuenta con una solicitud de inscripción.</p>
+
+    <form method="post" action="{% url 'buscar_solicitud' %}" novalidate>  
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="rut">Ingrese el RUT del usuario:</label>
+            <input type="text" class="form-control" name="rut" id="rut" required>
+            <span id="rut-error" class="text-danger"></span>
+        </div>
+        
+        <br>
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+
+    {% if solicitud %}
+    <h2>Detalles de la Solicitud</h2>
+    <p><strong>RUT:</strong> {{ solicitud.rut }}</p>
+    <p><strong>Nombre:</strong> {{ solicitud.nombre }}</p>
+    <p><strong>Apellidos:</strong> {{ solicitud.apellidos }}</p>
+    <p><strong>Estado:</strong> {{ solicitud.estado }}</p>
+    <p><strong>Fecha de Solicitud:</strong> {{ solicitud.fecha_solicitud }}</p>
+    {% else %}
+    {% endif %}
+</div>
+<script src="{% static 'javascript/javasc.js' %}"></script>
+{% endblock %}

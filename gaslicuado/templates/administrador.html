@@ -1,0 +1,43 @@
+{% extends "master.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h1>Administrar solicitudes</h1>
+    <a class="btn btn-success" href="{% url 'crear_solicitud' %}">Nueva Solicitud</a>
+    <div class="card mt-4">
+        <div class="card-body">
+            <!-- Table Responsive -->
+            <div class="table-responsive">
+                <table class="table table-striped mt-3">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Rut</th>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for solicitud in solicitudes %}
+                        <tr>
+                            <td>{{ solicitud.id }}</td>
+                            <td>{{ solicitud.rut }}</td>
+                            <td>{{ solicitud.nombre }}</td>
+                            <td>{{ solicitud.apellidos }}</td>
+                            <td>{{ solicitud.estado }}</td>
+                            <td>
+                                <a class="btn btn-info btn-sm" href="{% url 'detalles_solicitud' solicitud.id %}">Ver Detalles</a>
+                                <a class="btn btn-warning btn-sm" href="{% url 'editar_solicitud' solicitud.id %}">Editar</a>
+                                <a class="btn btn-danger btn-sm" href="{% url 'eliminar_solicitud' solicitud.id %}">Eliminar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
